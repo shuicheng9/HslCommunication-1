@@ -71,11 +71,11 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HslCommunication, Version=9.2.1.0, Culture=neutral, PublicKeyToken=cdb2261fa039ed67, processorArchitecture=MSIL">
-      <HintPath>..\packages\HslCommunication.9.2.1\lib\net451\HslCommunication.dll</HintPath>
+    <Reference Include="HslCommunication, Version=9.3.2.0, Culture=neutral, PublicKeyToken=cdb2261fa039ed67, processorArchitecture=MSIL">
+      <HintPath>..\packages\HslCommunication.9.3.2\lib\net451\HslCommunication.dll</HintPath>
     </Reference>
-    <Reference Include="HslControls, Version=2.3.1.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
-      <HintPath>..\packages\HslControls.2.3.1\lib\net45\HslControls.dll</HintPath>
+    <Reference Include="HslControls, Version=2.4.1.0, Culture=neutral, PublicKeyToken=a3ad7c5c937ec0c0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HslControls.2.4.1\lib\net45\HslControls.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -127,11 +127,23 @@
     <Compile Include="BarCode\FormSickBarCode.Designer.cs">
       <DependentUpon>FormSickBarCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="CNC\FormCncFanuc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CNC\FormCncFanuc.Designer.cs">
+      <DependentUpon>FormCncFanuc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\FormBasicControl.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Control\FormBasicControl.Designer.cs">
       <DependentUpon>FormBasicControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\FormInputString.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\FormInputString.Designer.cs">
+      <DependentUpon>FormInputString.cs</DependentUpon>
     </Compile>
     <Compile Include="Control\FormPipe.cs">
       <SubType>Form</SubType>
@@ -163,6 +175,7 @@
     <Compile Include="DemoControl\UserControlReadWriteServer.Designer.cs">
       <DependentUpon>UserControlReadWriteServer.cs</DependentUpon>
     </Compile>
+    <Compile Include="DemoDeviceList.cs" />
     <Compile Include="DemoUtils.cs" />
     <Compile Include="FormAuthor.cs">
       <SubType>Form</SubType>
@@ -193,6 +206,42 @@
     </Compile>
     <Compile Include="FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormHslMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHslMap.Designer.cs">
+      <DependentUpon>FormHslMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hsl\FormDtuServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Hsl\FormDtuServer.Designer.cs">
+      <DependentUpon>FormDtuServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC\FormAllenBrandlySLC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC\FormAllenBrandlySLC.Designer.cs">
+      <DependentUpon>FormAllenBrandlySLC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC\FormMcUdpServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC\FormMcUdpServer.Designer.cs">
+      <DependentUpon>FormMcUdpServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC\FormOmronUdpServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC\FormOmronUdpServer.Designer.cs">
+      <DependentUpon>FormOmronUdpServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Robot\FormAbbServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Robot\FormAbbServer.Designer.cs">
+      <DependentUpon>FormAbbServer.cs</DependentUpon>
     </Compile>
     <Compile Include="Hsl\FormPlainSocket.cs">
       <SubType>Form</SubType>
@@ -485,6 +534,18 @@
     <Compile Include="PLC\FormMelsecRBinary.Designer.cs">
       <DependentUpon>FormMelsecRBinary.cs</DependentUpon>
     </Compile>
+    <Compile Include="PLC\FormOmronConnectedCip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC\FormOmronConnectedCip.Designer.cs">
+      <DependentUpon>FormOmronConnectedCip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC\FormOmronHostLinkCMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC\FormOmronHostLinkCMode.Designer.cs">
+      <DependentUpon>FormOmronHostLinkCMode.cs</DependentUpon>
+    </Compile>
     <Compile Include="PLC\FormOmronServer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -634,6 +695,12 @@
     </Compile>
     <Compile Include="PLC\FormAllenBrandlyBrowser.Designer.cs">
       <DependentUpon>FormAllenBrandlyBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Redis\FormRedisCopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Redis\FormRedisCopy.Designer.cs">
+      <DependentUpon>FormRedisCopy.cs</DependentUpon>
     </Compile>
     <Compile Include="Redis\FormRedisInput.cs">
       <SubType>Form</SubType>
@@ -799,6 +866,18 @@
     <Compile Include="Redis\RedisBrowser.Designer.cs">
       <DependentUpon>RedisBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Robot\FormKukaTcp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Robot\FormKukaTcp.Designer.cs">
+      <DependentUpon>FormKukaTcp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Robot\FormYamahaRCX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Robot\FormYamahaRCX.Designer.cs">
+      <DependentUpon>FormYamahaRCX.cs</DependentUpon>
+    </Compile>
     <Compile Include="Robot\FormABBWebApi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -846,6 +925,12 @@
     </Compile>
     <Compile Include="Robot\FormKuka.Designer.cs">
       <DependentUpon>FormKuka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sensor\FormVibrationSensorClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sensor\FormVibrationSensorClient.Designer.cs">
+      <DependentUpon>FormVibrationSensorClient.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -909,8 +994,14 @@
     <EmbeddedResource Include="BarCode\FormSickBarCode.resx">
       <DependentUpon>FormSickBarCode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CNC\FormCncFanuc.resx">
+      <DependentUpon>FormCncFanuc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Control\FormBasicControl.resx">
       <DependentUpon>FormBasicControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\FormInputString.resx">
+      <DependentUpon>FormInputString.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\FormPipe.resx">
       <DependentUpon>FormPipe.cs</DependentUpon>
@@ -944,6 +1035,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHslMap.resx">
+      <DependentUpon>FormHslMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hsl\FormDtuServer.resx">
+      <DependentUpon>FormDtuServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC\FormAllenBrandlySLC.resx">
+      <DependentUpon>FormAllenBrandlySLC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC\FormMcUdpServer.resx">
+      <DependentUpon>FormMcUdpServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC\FormOmronUdpServer.resx">
+      <DependentUpon>FormOmronUdpServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Robot\FormAbbServer.resx">
+      <DependentUpon>FormAbbServer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Hsl\FormPlainSocket.resx">
       <DependentUpon>FormPlainSocket.cs</DependentUpon>
@@ -1089,6 +1198,12 @@
     <EmbeddedResource Include="PLC\FormMelsecRBinary.resx">
       <DependentUpon>FormMelsecRBinary.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PLC\FormOmronConnectedCip.resx">
+      <DependentUpon>FormOmronConnectedCip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC\FormOmronHostLinkCMode.resx">
+      <DependentUpon>FormOmronHostLinkCMode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PLC\FormOmronServer.resx">
       <DependentUpon>FormOmronServer.cs</DependentUpon>
     </EmbeddedResource>
@@ -1163,6 +1278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PLC\FormAllenBrandlyBrowser.resx">
       <DependentUpon>FormAllenBrandlyBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Redis\FormRedisCopy.resx">
+      <DependentUpon>FormRedisCopy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Redis\FormRedisInput.resx">
       <DependentUpon>FormRedisInput.cs</DependentUpon>
@@ -1255,6 +1373,12 @@
     <EmbeddedResource Include="Redis\RedisBrowser.resx">
       <DependentUpon>RedisBrowser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Robot\FormKukaTcp.resx">
+      <DependentUpon>FormKukaTcp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Robot\FormYamahaRCX.resx">
+      <DependentUpon>FormYamahaRCX.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Robot\FormABBWebApi.resx">
       <DependentUpon>FormABBWebApi.cs</DependentUpon>
     </EmbeddedResource>
@@ -1279,6 +1403,9 @@
     <EmbeddedResource Include="Robot\FormKuka.resx">
       <DependentUpon>FormKuka.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sensor\FormVibrationSensorClient.resx">
+      <DependentUpon>FormVibrationSensorClient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Toledo\FormToledoSerial.resx">
       <DependentUpon>FormToledoSerial.cs</DependentUpon>
     </EmbeddedResource>
@@ -1298,6 +1425,7 @@
       <DependentUpon>FormWebsocketServer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="HslCommunicationDemo_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -1316,6 +1444,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bitbug_favicon.ico" />
+    <None Include="img\action_Cancel_16xLG.png" />
+    <Content Include="img\kuka_help.jpg" />
+    <None Include="img\zkt.png" />
+    <None Include="img\yaskawa.png" />
+    <None Include="img\websocket.png" />
+    <None Include="img\fanuc.jpg" />
+    <None Include="img\efort.png" />
+    <None Include="img\fatek.png" />
+    <None Include="img\abb.png" />
+    <None Include="img\kuka.png" />
+    <None Include="img\beckhoff.png" />
+    <None Include="img\robot.png" />
     <None Include="img\toledo.png" />
     <None Include="img\copyright.jpg" />
     <None Include="img\mqtt.png" />
@@ -1370,5 +1510,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

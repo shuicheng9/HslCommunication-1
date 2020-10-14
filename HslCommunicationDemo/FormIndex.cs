@@ -22,8 +22,6 @@ namespace HslCommunicationDemo
 			FormLoad.OpenWebside( linkLabel1.Text );
 		}
 
-		private Timer timer1s;
-
 		private void FormCharge_Load( object sender, EventArgs e )
 		{
 			SetUpdayeInfo( );
@@ -33,52 +31,26 @@ namespace HslCommunicationDemo
 				Text = "Start Page";
 			}
 
-			if (Program.IsActive)
-			{
-				hslLedDisplay1.DisplayText = "-----";
-			}
-			else
-			{
-				timer1s = new Timer( );
-				timer1s.Tick += Timer1s_Tick;
-				timer1s.Interval = 500;
-				timer1s.Start( );
-			}
-		}
-
-		int tick = 0;
-		private void Timer1s_Tick( object sender, EventArgs e )
-		{
-			tick++;
-			if (tick == 2) tick = 0;
-
-			TimeSpan ts = DateTime.Now - Program.StartTime;
-			double remain = 8d - ts.TotalHours;
-			if (remain < 0) hslLedDisplay1.DisplayText = "00:00";
-			else
-			{
-				int hour = (int)remain;
-				int min = 59 - ts.Minutes;
-				if (tick == 0) hslLedDisplay1.DisplayText = $"{hour:D2}:{min:D2}";
-				else hslLedDisplay1.DisplayText = $"{hour:D2} {min:D2}";
-			}
 		}
 
 		private void SetUpdayeInfo( )
 		{
-			textBox1.Text = @"V9.2.1
-1. Toledo: 托利多电子秤的字节触发的时候，传递出来携带原始的字节数组，方便自行处理，Demo界面优化，显示信息更加完善。
-2. Lsis: Lsis的PLC通信类修复一些bug，感谢埃及朋友的提供的技术支持。
-3. MqttSyncClient: 新增ReadString方法，以字符串的形式来和服务器交互，默认编码UTF8，当然也可以自己指定编码，本质还是读取字节数据。
-4. WebsocketClient: websocket的客户端类，重新设计异常重连，网络异常时触发 OnNetworkError 事件，用户应该捕获事件，然后在事件里重连服务器，直到成功为止。
-5. MqttClient: Mqtt客户端类，重新设计异常重连，网络异常时触发 OnNetworkError 事件，用户应该捕获事件，然后在事件里重连服务器，直到成功为止。
-6. MqttSyncClient: 支持读取数据的进度回调功能，支持三种进度报告，数据上传到服务器的进度报告，服务器处理进度报告，数据返回到客户端的进度报告。
-7. PanasonicMewtocol: 修复注释错误，L区的数据也可以进行L100F，L2.3访问。
-8. DLT645: 初步添加电力规约协议的串口实现，目前只实现了读取数据，还未测试，等待后续的测试完善。
-9. Omron-cip: 读写字符串仍然没有测试通过，请暂时不要调用。
-10. 官网的备案失效了，重新备案需要点时间，请访问 http://118.24.36.220/ 然后去顶部的菜单找相应的入口。
-11. 本软件已经申请软件著作权，软著登字第5219522号，任何盗用软件，破解软件，未经正式合同授权而商业使用均视为侵权。
-12. HSL的目标是打造成工业互联网的利器，工业大数据的基础，打造边缘计算平台。企业终身授权费：8000元(不含税)。";
+			textBox1.Text = @"V9.3.2
+1. KeyenceNanoSerial: 修复读写R寄存器时，提示地址格式异常的BUG，已经测试通过。
+2. MelsecMcUdpServer: 新增三菱MC协议的UDP虚拟PLC，支持数据读写，支持二进制和ASCII格式。
+3. OmronFinsUdpServer: 新增欧姆龙Fins协议的UDP的虚拟PLC，支持数据读写操作。
+4. MqttServer: 修复MQTT服务器在客户端发送批量订阅的时候，服务器会触发BUG的问题。
+5. ConnectPool&lt;TConnector&gt;类代码注释优化，新增连接次数峰值属性。
+6. RedisSubscribe: 订阅服务器重新设计，订阅实现事件触发，支持手动订阅，取消订阅操作。
+7. RedisClient: 支持了订阅的操作，当订阅的时候，创建订阅的实例化对象，应该在连接参数设置之后再进行订阅。
+8. RedisClientPool：新增Redis连接池类，默认不限制连接数量，使用起来和普通的RedisClient一样，适合一个项目实例化一个对象。
+9. MqttSyncClientPool: 新增MqttSyncClient的连接池版本类，默认不限制连接数量，用起来和普通的MqttSyncClient一样。
+10. LogNetFileSize: 根据文件大小的日志类，实例化时支持设置允许存在的文件上限，如果设置为10，只保留最新的10个日志文件。
+11. LogNetDateTime: 根据日期的日志类，实例化时支持设置允许存在的文件上限，如果设置为按天存储，上限为10，就是保留10天的日志。
+12. AllenBradleySLCNet: 新增AB PLC的数据访问类，适合比较老的AB PLC，测试通过的是1747系列。地址格式为A9:0
+13. AllenBradleyNet: 读写bool值的时候，不带下标访问单bool数据，如果需要访问bool数组，就需要带下标访问，例如：A[0]。
+14. 官网地址： http://www.hslcommunication.cn/ 官网的界面全新设计过，感谢浏览关注。
+15. 本软件已经申请软件著作权，软著登字第5219522号，任何盗用软件，破解软件，未经正式合同授权而商业使用均视为侵权。";
 		}
 
 

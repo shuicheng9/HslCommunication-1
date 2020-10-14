@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Linq;
 #if !NET35
 using System.Threading.Tasks;
 #endif
@@ -342,6 +343,27 @@ namespace HslCommunicationDemo
 			}
 		}
 
+		private async void button9_Click( object sender, EventArgs e )
+		{
+			// 文件的删除不需要放在后台线程，前台即可处理，无论多少大的文件，无论该文件是否在下载中，都是很快删除的
+			OperateResult result = await integrationFileClient.DeleteFolderFilesAsync(
+				textBox_delete_factory.Text,                        // 第一级分类，指示文件存储的类别，对应在服务器端存储的路径不一致
+				textBox_delete_group.Text,                          // 第二级分类，指示文件存储的类别，对应在服务器端存储的路径不一致
+				textBox_delete_id.Text                              // 第三级分类，指示文件存储的类别，对应在服务器端存储的路径不一致
+				);
+			if (result.IsSuccess)
+			{
+				// delete file success
+				MessageBox.Show( "文件信息删除成功！" );
+			}
+			else
+			{
+				// 删除失败的原因除了一般的网络问题，还有因为服务器的文件不存在，会在Message里有显示。
+				// file not exsist or net work exception
+				MessageBox.Show( "文件删除失败，原因：" + result.ToMessageShowString( ) );
+			}
+		}
+
 		#endregion
 
 		#region DownloadPathFolders
@@ -566,6 +588,26 @@ namespace HslCommunicationDemo
 				}
 			}
 
+		}
+
+		public override void SaveXmlParameter( XElement element )
+		{
+			element.SetAttributeValue( DemoDeviceList.XmlIpAddress, textBox1.Text );
+			element.SetAttributeValue( DemoDeviceList.XmlPort, textBox2.Text );
+			element.SetAttributeValue( DemoDeviceList.XmlToken, textBox15.Text );
+		}
+
+		public override void LoadXmlParameter( XElement element )
+		{
+			base.LoadXmlParameter( element );
+			textBox1.Text = element.Attribute( DemoDeviceList.XmlIpAddress ).Value;
+			textBox2.Text = element.Attribute( DemoDeviceList.XmlPort ).Value;
+			textBox15.Text = element.Attribute( DemoDeviceList.XmlToken ).Value;
+		}
+
+		private void userControlHead1_SaveConnectEvent_1( object sender, EventArgs e )
+		{
+			userControlHead1_SaveConnectEvent( sender, e );
 		}
 	}
 }

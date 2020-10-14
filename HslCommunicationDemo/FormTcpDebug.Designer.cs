@@ -29,6 +29,7 @@
         private void InitializeComponent( )
         {
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.button6 = new System.Windows.Forms.Button();
 			this.button5 = new System.Windows.Forms.Button();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
 			this.button4 = new System.Windows.Forms.Button();
@@ -49,13 +50,15 @@
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.userControlHead1 = new HslCommunicationDemo.DemoControl.UserControlHead();
-			this.button6 = new System.Windows.Forms.Button();
 			this.panel2.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel2
 			// 
+			this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.panel2.Controls.Add(this.button6);
 			this.panel2.Controls.Add(this.button5);
@@ -75,6 +78,16 @@
 			this.panel2.Size = new System.Drawing.Size(978, 540);
 			this.panel2.TabIndex = 20;
 			// 
+			// button6
+			// 
+			this.button6.Location = new System.Drawing.Point(853, 3);
+			this.button6.Name = "button6";
+			this.button6.Size = new System.Drawing.Size(120, 28);
+			this.button6.TabIndex = 26;
+			this.button6.Text = "toledo msg test";
+			this.button6.UseVisualStyleBackColor = true;
+			this.button6.Click += new System.EventHandler(this.button6_Click);
+			// 
 			// button5
 			// 
 			this.button5.Location = new System.Drawing.Point(875, 92);
@@ -83,6 +96,7 @@
 			this.button5.TabIndex = 25;
 			this.button5.Text = "清空";
 			this.button5.UseVisualStyleBackColor = true;
+			this.button5.Click += new System.EventHandler(this.button5_Click);
 			// 
 			// checkBox2
 			// 
@@ -106,6 +120,7 @@
 			// 
 			// label8
 			// 
+			this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label8.AutoSize = true;
 			this.label8.Location = new System.Drawing.Point(8, 513);
 			this.label8.Name = "label8";
@@ -279,16 +294,6 @@
 			this.userControlHead1.Name = "userControlHead1";
 			this.userControlHead1.Size = new System.Drawing.Size(1004, 32);
 			this.userControlHead1.TabIndex = 21;
-			// 
-			// button6
-			// 
-			this.button6.Location = new System.Drawing.Point(853, 3);
-			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(120, 28);
-			this.button6.TabIndex = 26;
-			this.button6.Text = "toledo msg test";
-			this.button6.UseVisualStyleBackColor = true;
-			this.button6.Click += new System.EventHandler(this.button6_Click);
 			// 
 			// FormTcpDebug
 			// 

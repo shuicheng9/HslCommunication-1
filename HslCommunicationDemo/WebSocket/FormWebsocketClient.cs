@@ -9,10 +9,11 @@ using System.Windows.Forms;
 using HslCommunication.WebSocket;
 using HslCommunication;
 using System.Threading;
+using System.Xml.Linq;
 
 namespace HslCommunicationDemo
 {
-	#region FormSimplifyNet
+	#region Websocket
 
 
 	public partial class FormWebsocketClient : HslFormContent
@@ -75,11 +76,11 @@ namespace HslCommunicationDemo
 			}
 
 			wsClient?.ConnectClose( );
-			wsClient = new WebSocketClient( textBox1.Text, int.Parse(textBox2.Text) );
+			wsClient = new WebSocketClient( textBox1.Text, int.Parse( textBox2.Text ), textBox5.Text );//( textBox1.Text, int.Parse(textBox2.Text), textBox5.Text );
 			wsClient.LogNet = new HslCommunication.LogNet.LogNetSingle( string.Empty );
 			wsClient.LogNet.BeforeSaveToFile += LogNet_BeforeSaveToFile;
 			wsClient.OnClientApplicationMessageReceive += WebSocket_OnWebSocketMessageReceived;
-			wsClient.OnNetworkError += WsClient_OnNetworkError;
+			//wsClient.OnNetworkError += WsClient_OnNetworkError; // 这里使用内置的处理方式，一般也就够用了。
 			OperateResult connect = null;
 			if(string.IsNullOrEmpty(textBox3.Text))
 				connect = wsClient.ConnectServer( );
@@ -111,6 +112,8 @@ namespace HslCommunicationDemo
 					// 每隔10秒重连
 					System.Threading.Thread.Sleep( 10_000 );
 					client.LogNet?.WriteInfo( "准备重新连接服务器..." );
+
+					if (client.IsClosed) return;  // 如果已经是关闭了的，就不需要进行重连服务器了
 					OperateResult connect = client.ConnectServer( );
 					if (connect.IsSuccess)
 					{
@@ -189,7 +192,7 @@ namespace HslCommunicationDemo
 			button2.Enabled = false;
 			panel2.Enabled = false;
 
-			wsClient.ConnectClose( );
+			wsClient?.ConnectClose( );
 		}
 
 		private void button3_Click( object sender, EventArgs e )
@@ -224,6 +227,35 @@ namespace HslCommunicationDemo
 			//{
 				
 			//}
+		}
+
+
+		public override void SaveXmlParameter( XElement element )
+		{
+			element.SetAttributeValue( DemoDeviceList.XmlIpAddress, textBox1.Text );
+			element.SetAttributeValue( DemoDeviceList.XmlPort, textBox2.Text );
+			element.SetAttributeValue( DemoDeviceList.XmlUrl, textBox5.Text );
+			element.SetAttributeValue( DemoDeviceList.XmlTimeout, textBox11.Text );
+			element.SetAttributeValue( DemoDeviceList.XmlTopic, textBox3.Text );
+			element.SetAttributeValue( DemoDeviceList.XmlUserName, textBox9.Text );
+			element.SetAttributeValue( DemoDeviceList.XmlPassword, textBox10.Text );
+		}
+
+		public override void LoadXmlParameter( XElement element )
+		{
+			base.LoadXmlParameter( element );
+			textBox1.Text = element.Attribute( DemoDeviceList.XmlIpAddress ).Value;
+			textBox2.Text = element.Attribute( DemoDeviceList.XmlPort ).Value;
+			textBox5.Text = element.Attribute( DemoDeviceList.XmlUrl ).Value;
+			textBox11.Text = element.Attribute( DemoDeviceList.XmlTimeout ).Value;
+			textBox3.Text = element.Attribute( DemoDeviceList.XmlTopic ).Value;
+			textBox9.Text = element.Attribute( DemoDeviceList.XmlUserName ).Value;
+			textBox10.Text = element.Attribute( DemoDeviceList.XmlPassword ).Value;
+		}
+
+		private void userControlHead1_SaveConnectEvent_1( object sender, EventArgs e )
+		{
+			userControlHead1_SaveConnectEvent( sender, e );
 		}
 	}
 

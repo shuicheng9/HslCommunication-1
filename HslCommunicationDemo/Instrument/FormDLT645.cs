@@ -11,6 +11,7 @@ using HslCommunication;
 using HslCommunication.Instrument.DLT;
 using System.Threading;
 using System.IO.Ports;
+using System.Xml.Linq;
 
 namespace HslCommunicationDemo
 {
@@ -180,8 +181,78 @@ namespace HslCommunicationDemo
             }
             else
             {
-                MessageBox.Show( "Active Code failed" );
+                MessageBox.Show( "Active Code failed:" + active.Message );
             }
+        }
+
+        private void button4_Click( object sender, EventArgs e )
+        {
+            OperateResult<string> read = dLT645.ReadAddress( );
+            if (read.IsSuccess)
+            {
+                textBox12.Text = $"[{DateTime.Now:HH:mm:ss}] Address:{read.Content}";
+            }
+            else
+            {
+                MessageBox.Show( "Read failed: " + read.Message );
+            }
+        }
+
+        private void button6_Click( object sender, EventArgs e )
+        {
+            // 广播当前时间
+            OperateResult read = dLT645.BroadcastTime( DateTime.Now );
+            if (read.IsSuccess)
+            {
+                textBox12.Text = $"[{DateTime.Now:HH:mm:ss}] BroadcastTime Success";
+            }
+            else
+            {
+                MessageBox.Show( "Read failed: " + read.Message );
+            }
+        }
+
+        private void button5_Click( object sender, EventArgs e )
+        {
+            // 写通信地址
+            OperateResult read = dLT645.WriteAddress( textBox1.Text );
+            if (read.IsSuccess)
+            {
+                textBox12.Text = $"[{DateTime.Now:HH:mm:ss}] Write Success";
+            }
+            else
+            {
+                MessageBox.Show( "Read failed: " + read.Message );
+            }
+        }
+
+
+        public override void SaveXmlParameter( XElement element )
+        {
+            element.SetAttributeValue( DemoDeviceList.XmlCom, comboBox3.Text );
+            element.SetAttributeValue( DemoDeviceList.XmlBaudRate, textBox2.Text );
+            element.SetAttributeValue( DemoDeviceList.XmlDataBits, textBox16.Text );
+            element.SetAttributeValue( DemoDeviceList.XmlStopBit, textBox17.Text );
+            element.SetAttributeValue( DemoDeviceList.XmlParity, comboBox1.SelectedIndex );
+            element.SetAttributeValue( DemoDeviceList.XmlStation, textBox15.Text );
+            element.SetAttributeValue( DemoDeviceList.XmlRtsEnable, checkBox5.Checked );
+        }
+
+        public override void LoadXmlParameter( XElement element )
+        {
+            base.LoadXmlParameter( element );
+            comboBox3.Text = element.Attribute( DemoDeviceList.XmlCom ).Value;
+            textBox2.Text = element.Attribute( DemoDeviceList.XmlBaudRate ).Value;
+            textBox16.Text = element.Attribute( DemoDeviceList.XmlDataBits ).Value;
+            textBox17.Text = element.Attribute( DemoDeviceList.XmlStopBit ).Value;
+            comboBox1.SelectedIndex = int.Parse( element.Attribute( DemoDeviceList.XmlParity ).Value );
+            textBox15.Text = element.Attribute( DemoDeviceList.XmlStation ).Value;
+            checkBox5.Checked = bool.Parse( element.Attribute( DemoDeviceList.XmlRtsEnable ).Value );
+        }
+
+        private void userControlHead1_SaveConnectEvent_1( object sender, EventArgs e )
+        {
+            userControlHead1_SaveConnectEvent( sender, e );
         }
     }
 }
